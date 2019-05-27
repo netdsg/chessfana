@@ -13,28 +13,28 @@ chessfanaCgi.py:
 This is a cgi script that will process the chess json files when called on by the Grafana JSON data store.  On line three you can set the directory for the <username>_chessGames.json files.
 
 High Level Diagram
-<diagram>
+![alt tag](https://github.com/netdsg/chessfana/blob/master/chessFanaDiagram.png)
   
-Step #1<br>
+**Step #1**<br>
 Install Grafna
 
-Step #2<br>
+**Step #2**<br>
 Install the Grafana JSON data source type.  This is a plugin that can be found at grafana.com
 
-Step #3<br>
+**Step #3**<br>
 Select a web server for the chessfanaCgi.py script.  One solution would be to install apache on the same server Grafana is one.  
 
-Step #4<br>
+**Step #4**<br>
 Run getChessStats.py for each user you'd like to graph.  It may be desireable to set up a cron job t
 o run this daily.
 
-Step #5<br>
+**Step #5**<br>
 Place the <userame>_chessGames.json files in the same cgi-bin directory as chessfanaCgi.py.
 
-Step #6<br>
+**Step #6**<br>
 Configure a chessfana data source by selecting the JSON data source type and pointing it at chessfanaCgi.py.  For exampe:
 
 URL :  http://<SERVER>/cgi-bin/chessfanaCgi.py
 
-Step #6<br>
+**Step #6**<br>
 Set up a dashboard that leverages the newly created chessfana data source.
