@@ -12,7 +12,7 @@ chessfanaCgi.py:
 
 This is a cgi script that will process the chess json files when called on by the Grafana JSON data store.  On line three you can set the directory for the <username>_chessGames.json files.
 
-High Level Diagram
+**High Level Diagram**
 ![alt tag](https://github.com/netdsg/chessfana/blob/master/chessFanaDiagram.png)
   
 **Step #1**<br>
@@ -38,3 +38,8 @@ URL :  http://<SERVER>/cgi-bin/chessfanaCgi.py
 
 **Step #6**<br>
 Set up a dashboard that leverages the newly created chessfana data source.
+
+**Example Grafana Dashboard**<br>
+GrafanaChessfanaDashboardExample.json is an example Grafana dashboard that uses this chessfana.
+
+**Example Graphs & Table**
