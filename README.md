@@ -14,7 +14,6 @@ This is a cgi script that will process the chess json files when called on by th
 
 **High Level Diagram**
 ![alt tag](https://github.com/netdsg/chessfana/blob/master/chessFanaDiagram.png)
-  
 **Step #1**<br>
 Install Grafna
 
@@ -32,7 +31,7 @@ Place the <userame>_chessGames.json files in the same directory and set the dire
 
 **Step #6**<br>
 Configure a chessfana data source by selecting the JSON data source type and pointing it at chessfanaCgi.py.  For example:
-URL :  http://<SERVER>/cgi-bin/chessfanaCgi.py
+URL :  http://\<SERVER\>/cgi-bin/chessfanaCgi.py
 
 **Step #6**<br>
 Set up a dashboard that leverages the newly created chessfana data source.
