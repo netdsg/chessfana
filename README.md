@@ -32,8 +32,7 @@ o run this daily.
 Place the <userame>_chessGames.json files in the same cgi-bin directory as chessfanaCgi.py.
 
 **Step #6**<br>
-Configure a chessfana data source by selecting the JSON data source type and pointing it at chessfanaCgi.py.  For exampe:
-
+Configure a chessfana data source by selecting the JSON data source type and pointing it at chessfanaCgi.py.  For example:
 URL :  http://<SERVER>/cgi-bin/chessfanaCgi.py
 
 **Step #6**<br>
