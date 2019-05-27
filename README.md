@@ -37,7 +37,7 @@ URL :  http://\<SERVER\>/cgi-bin/chessfanaCgi.py
 Set up a dashboard that leverages the newly created chessfana data source.
 
 **Example Grafana Dashboard**<br>
-GrafanaChessfanaDashboardExample.json is an example Grafana dashboard that uses this chessfana.
+GrafanaChessfanaDashboardExample.json is an example Grafana dashboard that uses chessfana.
 
 **Example Graphs & Table**
 ![alt tag](https://github.com/netdsg/chessfana/blob/master/rating.png)
