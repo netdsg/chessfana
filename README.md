@@ -43,3 +43,8 @@ Set up a dashboard that leverages the newly created chessfana data source.
 GrafanaChessfanaDashboardExample.json is an example Grafana dashboard that uses this chessfana.
 
 **Example Graphs & Table**
+Example Rating graphs
+![alt tag](https://github.com/netdsg/chessfana/blob/master/rating.png)
+![alt tag](https://github.com/netdsg/chessfana/blob/master/twoUserGraph.png)
+Example Table
+![alt tag](https://github.com/netdsg/chessfana/blob/master/top20.png)
