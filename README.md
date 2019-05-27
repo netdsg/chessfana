@@ -10,7 +10,7 @@ getChessStats.py: This script downloads chess games from chess.com.  Providing t
 
 chessfanaCgi.py:
 
-This is a cgi script that will process the chess json files when called on by the Grafana JSON data store.
+This is a cgi script that will process the chess json files when called on by the Grafana JSON data store.  On line three you can set the directory for the <username>_chessGames.json files.
 
 High Level Diagram
 <diagram>
