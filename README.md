@@ -1,8 +1,8 @@
 # chessfana
 Leverage the chess.com API to draw graphs &amp; tables with Grafana.  chessfana is comprised of two python scripts.
 
-getChessStats.py
-chessfanaCgi.py
+- getChessStats.py<br>
+- chessfanaCgi.py
 
 getChessStats.py: This script downloads chess games from chess.com.  Providing the script whith a username will result in a json file containing all the users games.  On line 3 of the script there is a minYear attribute that restricts how many years back it will look.
 
