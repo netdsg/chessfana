@@ -3,7 +3,6 @@
 jsonGameDirectory = '/usr/lib/cgi-bin'
 
 import cgi, subprocess, os, json, sys, datetime, re
-from http import cookies
 from operator import itemgetter
 
 def getEpoch(dt):
