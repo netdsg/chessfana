@@ -56,7 +56,8 @@ def getTableData(chessHash, fromTime, toTime, color, gameType):
         if i != 'totalGames':
             tableRatioList.append([round(gameHash[i]['winRatio'] * 100), gameHash[i]['occured'], i])
     tableRatioList = sorted(tableRatioList, key = itemgetter(0 ,1), reverse=True)
-    return tableRatioList[0:20]
+    #return tableRatioList[0:20]
+    return tableRatioList
 #######################################################################
 ### API - search
 #######################################################################
@@ -72,8 +73,10 @@ if os.environ['REQUEST_URI'] == os.environ['SCRIPT_NAME'] + '/search':
                 gameTypes.add(g['time_class'])
         for t in gameTypes:
             displaySources.append(chessPlayer + ' ' + t + ' rating')
+            displaySources.append(chessPlayer + ' ' + t + ' opponent rating')
             displaySources.append(chessPlayer + ' ' + t + ' black table')
             displaySources.append(chessPlayer + ' ' + t + ' white table')
+            displaySources.append(chessPlayer + ' ' + t + ' win count')
     print('Content-type: text/html\n\n')
     print(json.dumps(displaySources))
 
@@ -92,6 +95,7 @@ elif os.environ['REQUEST_URI'] == os.environ['SCRIPT_NAME'] + '/query':
     for m in queryHash['targets']:
         ourTarget = m['target']
         chessPlayer = ourTarget.split()[0]
+        gameType = ourTarget.split()[1]
         if m['type'] == 'table':
             tableTop = getTableData(masterPlayerHash[chessPlayer], fromTime, toTime, ourTarget.split()[2], ourTarget.split()[1])
             tableHash = {}
@@ -102,17 +106,56 @@ elif os.environ['REQUEST_URI'] == os.environ['SCRIPT_NAME'] + '/query':
             tableHash['rows'] = tableTop
             tableHash['type'] = 'table'
             dataList.append(tableHash)
-        else:
-            gameType = ourTarget.split()[1]
+        elif 'win count' in ourTarget:
+            count = 0
             dataPoints = []
             for month in masterPlayerHash[chessPlayer]:
                 for g in masterPlayerHash[chessPlayer][month]['games']:
                     if g['time_class'] == gameType:
                         if g['end_time'] > int(fromTime) and g['end_time'] <= int(toTime):
                             if g['white']['username'] == chessPlayer:
-                                dataPoints.append([g['white']['rating'], (g['end_time'] * 1000)])
+                                if g['white']['result'] == 'win':
+                                    state = 'win'
+                                else:
+                                    state = 'loose'
                             else:
-                                dataPoints.append([g['black']['rating'], (g['end_time'] * 1000)])
+                                if g['black']['result'] == 'win':
+                                    state = 'win' 
+                                else:
+                                    state = 'loose' 
+                            dataPoints.append([state, (g['end_time'] * 1000)])
+            dataPoints = sorted(dataPoints, key=itemgetter(1))
+            newDataList = []
+            for e in dataPoints:
+                if e[0] == 'win':
+                    count += 1
+                else: 
+                    count -= 1
+                newDataList.append([count, e[1]])
+            dataPoints = newDataList
+            if dataPoints != []:
+                dataPoints.append([dataPoints[-1][0], int(toTime) * 1000])
+            dataHash = {}
+            dataHash['target'] = m['target']
+            dataHash['datapoints'] = dataPoints
+            dataList.append(dataHash)
+        else:
+            dataPoints = []
+            for month in masterPlayerHash[chessPlayer]:
+                for g in masterPlayerHash[chessPlayer][month]['games']:
+                    if g['time_class'] == gameType:
+                        if 'opponent' not in ourTarget:
+                            if g['end_time'] > int(fromTime) and g['end_time'] <= int(toTime):
+                                if g['white']['username'] == chessPlayer:
+                                    dataPoints.append([g['white']['rating'], (g['end_time'] * 1000)])
+                                else:
+                                    dataPoints.append([g['black']['rating'], (g['end_time'] * 1000)])
+                        else:
+                            if g['end_time'] > int(fromTime) and g['end_time'] <= int(toTime):
+                                if g['white']['username'] != chessPlayer:
+                                    dataPoints.append([g['white']['rating'], (g['end_time'] * 1000)])
+                                else:
+                                    dataPoints.append([g['black']['rating'], (g['end_time'] * 1000)])
             dataPoints = sorted(dataPoints, key=itemgetter(1)) 
             if dataPoints != []:
                 dataPoints.append([dataPoints[-1][0], int(toTime) * 1000])
