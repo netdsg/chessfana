@@ -18,7 +18,7 @@ This is a cgi script that will process the chess json files when called on by th
 Install Grafna
 
 **Step #2**<br>
-Install the Grafana JSON data source type.  This is a plugin that can be found at grafana.com
+Install the Grafana JSON by simpod data source type.  This is a plugin that can be found at grafana.com
 
 **Step #3**<br>
 Select a web server for the chessfanaCgi.py script.  One solution would be to install apache on the same server Grafana is one.  
