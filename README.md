@@ -43,3 +43,6 @@ GrafanaChessfanaDashboardExample.json is an example Grafana dashboard that uses 
 ![alt tag](https://github.com/netdsg/chessfana/blob/master/rating.png)
 ![alt tag](https://github.com/netdsg/chessfana/blob/master/twoUserGraph.png)
 ![alt tag](https://github.com/netdsg/chessfana/blob/master/top20.png)
+![alt tag](https://github.com/netdsg/chessfana/blob/master/blitzWithOpponentRating.png)
+![alt tag](https://github.com/netdsg/chessfana/blob/master/blitzWinChart.png)
+
