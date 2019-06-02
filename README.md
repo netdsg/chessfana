@@ -33,7 +33,7 @@ Run getChessStats.py for each user you'd like to graph.  It may be desireable to
 In the Grafana GUI, configure a chessfana data source by selecting the JSON data source type and pointing it at chessfanaCgi.py.  For example:
 URL :  http://\<SERVER\>/cgi-bin/chessfanaCgi.py
 
-**Step #6**<br>
+**Step #7**<br>
 Set up a dashboard that leverages the newly created chessfana data source.
 
 **Example Grafana Dashboard**<br>
