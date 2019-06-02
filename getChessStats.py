@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
-minYear = 2016
+minYear = 2014
+jsonGameDirectory = '/usr/lib/cgi-bin/'
 
 import requests, json, os, datetime, sys
 
@@ -24,12 +25,12 @@ def getAllStats(chessPlayer):
     return chessHash
 
 chessSession = requests.Session()
-if not os.path.isfile(statsFile):
+if not os.path.isfile(jsonGameDirectory + statsFile):
     chessHash = getAllStats(chessPlayer)
 
 else:
 
-    with open(statsFile) as ourfile:
+    with open(jsonGameDirectory + statsFile) as ourfile:
         chessHash = json.load(ourfile)
 
     lastMonthSeen = list(sorted(chessHash.keys()))[-1]
@@ -45,9 +46,9 @@ else:
         print('downloading current month only')
         thisMonth = chessSession.get('https://api.chess.com/pub/player/' + chessPlayer + '/games/' + ("{:02d}".format(hashYear)) + '/' + ("{:02d}".format(hashMonth)))
         thisMonthHash = json.loads(thisMonth.text)
-        chessHash[str(hashYear) + str(hashMonth)] = thisMonthHash
+        chessHash[str(hashYear) + "{:02d}".format(hashMonth)] = thisMonthHash
  
-with open(statsFile, 'w') as outfile:
+with open(jsonGameDirectory + statsFile, 'w') as outfile:
     json.dump(chessHash, outfile)
 
-print(statsFile + ' has been prepared')
+print(jsonGameDirectory + statsFile + ' has been prepared')
