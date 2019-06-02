@@ -21,7 +21,7 @@ Install Grafna
 Install the Grafana JSON by simpod data source type.  This is a plugin that can be found at grafana.com
 
 **Step #3**<br>
-Select a web server for the chessfanaCgi.py script.  One solution would be to install apache on the same server Grafana is one.  
+Select a web server for the chessfanaCgi.py script.  One solution would be to install apache on the same server Grafana is on.  
 
 **Step #4**<br>
 Choose a directory for the json game files.  Set the jsonGameDirectory variable to this value in getChessStats.py & chessfanaCgi.py.  This variable is near the top in each script.
