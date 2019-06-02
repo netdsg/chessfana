@@ -24,13 +24,13 @@ Install the Grafana JSON by simpod data source type.  This is a plugin that can 
 Select a web server for the chessfanaCgi.py script.  One solution would be to install apache on the same server Grafana is one.  
 
 **Step #4**<br>
-Run getChessStats.py for each user you'd like to graph.  It may be desireable to set up a cron job to run this daily.
+Choose a directory for the json game files.  Set the jsonGameDirectory variable to this value in getChessStats.py & chessfanaCgi.py.  This variable is near the top in each script.
 
 **Step #5**<br>
-Place the \<userame\>_chessGames.json files in the same directory and set the directory location one line 3 of chessfanaCgi.py.
+Run getChessStats.py for each user you'd like to graph.  It may be desireable to set up a cron job to run this daily.
 
 **Step #6**<br>
-Configure a chessfana data source by selecting the JSON data source type and pointing it at chessfanaCgi.py.  For example:
+In the Grafana GUI, configure a chessfana data source by selecting the JSON data source type and pointing it at chessfanaCgi.py.  For example:
 URL :  http://\<SERVER\>/cgi-bin/chessfanaCgi.py
 
 **Step #6**<br>
