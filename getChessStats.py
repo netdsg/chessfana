@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 
+### test
+
 minYear = 2014
 jsonGameDirectory = '/usr/lib/cgi-bin/'
 
