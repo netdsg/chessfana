@@ -116,11 +116,15 @@ elif os.environ['REQUEST_URI'] == os.environ['SCRIPT_NAME'] + '/query':
                             if g['white']['username'] == chessPlayer:
                                 if g['white']['result'] == 'win':
                                     state = 'win'
+                                elif g['white']['result'] == 'stalemate':
+                                    state = 'stalemate'
                                 else:
                                     state = 'loose'
                             else:
                                 if g['black']['result'] == 'win':
                                     state = 'win' 
+                                elif g['white']['result'] == 'stalemate':
+                                    state = 'stalemate'
                                 else:
                                     state = 'loose' 
                             dataPoints.append([state, (g['end_time'] * 1000)])
@@ -129,7 +133,7 @@ elif os.environ['REQUEST_URI'] == os.environ['SCRIPT_NAME'] + '/query':
             for e in dataPoints:
                 if e[0] == 'win':
                     count += 1
-                else: 
+                elif e[0] == 'loose': 
                     count -= 1
                 newDataList.append([count, e[1]])
             dataPoints = newDataList
