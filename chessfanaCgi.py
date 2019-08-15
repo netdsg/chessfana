@@ -23,13 +23,13 @@ def getMasterPlayerHash():
         masterPlayerHash[chessPlayer] = playerHash
     return masterPlayerHash
 
-def getTableData(chessHash, fromTime, toTime, color, gameType):
+def getTableData(chessPlayer, chessHash, fromTime, toTime, color, gameType):
     gameHash = {}
     gameHash['totalGames'] = 0
     for m in chessHash:
         for g in chessHash[m]['games']:
             if g['end_time'] > int(fromTime) and g['end_time'] <= int(toTime):
-                if g[color]['username'] == 'netdsg' and g['time_class'] == gameType:
+                if g[color]['username'] == chessPlayer and g['time_class'] == gameType:
                     opening = re.search(r'(https://www.chess.com/openings/\S+)\"', str(g['pgn']))
                     if opening:
                         opening = opening.groups()[0]
@@ -63,7 +63,7 @@ def getTableData(chessHash, fromTime, toTime, color, gameType):
 #######################################################################
 
 if os.environ['REQUEST_URI'] == os.environ['SCRIPT_NAME'] + '/search':
-    displaySources = ['netdsg black top']
+    displaySources = []
     masterPlayerHash = getMasterPlayerHash()
     for chessPlayer in masterPlayerHash:
         chessHash = masterPlayerHash[chessPlayer]
@@ -97,7 +97,7 @@ elif os.environ['REQUEST_URI'] == os.environ['SCRIPT_NAME'] + '/query':
         chessPlayer = ourTarget.split()[0]
         gameType = ourTarget.split()[1]
         if m['type'] == 'table':
-            tableTop = getTableData(masterPlayerHash[chessPlayer], fromTime, toTime, ourTarget.split()[2], ourTarget.split()[1])
+            tableTop = getTableData(chessPlayer, masterPlayerHash[chessPlayer], fromTime, toTime, ourTarget.split()[2], ourTarget.split()[1])
             tableHash = {}
             tableHash['columns'] = []
             tableHash['columns'].append({'text' : 'Win Ratio', 'type' : 'string'})
