@@ -29,7 +29,7 @@ def getTableData(chessPlayer, chessHash, fromTime, toTime, color, gameType):
     for m in chessHash:
         for g in chessHash[m]['games']:
             if g['end_time'] > int(fromTime) and g['end_time'] <= int(toTime):
-                if g[color]['username'] == chessPlayer and g['time_class'] == gameType:
+                if g[color]['username'].lower() == chessPlayer.lower() and g['time_class'] == gameType:
                     opening = re.search(r'(https://www.chess.com/openings/\S+)\"', str(g['pgn']))
                     if opening:
                         opening = opening.groups()[0]
@@ -113,7 +113,7 @@ elif os.environ['REQUEST_URI'] == os.environ['SCRIPT_NAME'] + '/query':
                 for g in masterPlayerHash[chessPlayer][month]['games']:
                     if g['time_class'] == gameType:
                         if g['end_time'] > int(fromTime) and g['end_time'] <= int(toTime):
-                            if g['white']['username'] == chessPlayer:
+                            if g['white']['username'].lower() == chessPlayer.lower():
                                 if g['white']['result'] == 'win':
                                     state = 'win'
                                 elif g['white']['result'] == 'stalemate':
@@ -150,13 +150,13 @@ elif os.environ['REQUEST_URI'] == os.environ['SCRIPT_NAME'] + '/query':
                     if g['time_class'] == gameType:
                         if 'opponent' not in ourTarget:
                             if g['end_time'] > int(fromTime) and g['end_time'] <= int(toTime):
-                                if g['white']['username'] == chessPlayer:
+                                if g['white']['username'].lower() == chessPlayer.lower():
                                     dataPoints.append([g['white']['rating'], (g['end_time'] * 1000)])
                                 else:
                                     dataPoints.append([g['black']['rating'], (g['end_time'] * 1000)])
                         else:
                             if g['end_time'] > int(fromTime) and g['end_time'] <= int(toTime):
-                                if g['white']['username'] != chessPlayer:
+                                if g['white']['username'].lower() != chessPlayer.lower():
                                     dataPoints.append([g['white']['rating'], (g['end_time'] * 1000)])
                                 else:
                                     dataPoints.append([g['black']['rating'], (g['end_time'] * 1000)])
